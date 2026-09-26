@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>manahydproperties | Hyderabad Properties</title>
+
+    <meta name="description"
+          content="manahydproperties - Properties, plots and homes in Hyderabad. View properties, location, pricing and contact us directly.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f8f8f6;
+            color: #222;
+            line-height: 1.5;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid #e8e8e8;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: auto;
+            height: 72px;
+            padding: 0 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 700;
+            color: #1f2933;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #8a6d3b;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #444;
+            font-size: 15px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #8a6d3b;
+        }
+
+        .nav-contact {
+            background: #222;
+            color: white !important;
+            padding: 10px 17px;
+            border-radius: 7px;
+        }
+
+        .nav-contact:hover {
+            background: #8a6d3b;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 470px;
+            max-width: 1200px;
+            margin: auto;
+            padding: 90px 24px 70px;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero-small {
+            color: #8a6d3b;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6vw, 72px);
+            line-height: 1;
+            letter-spacing: -3px;
+            color: #1f2933;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #8a6d3b;
+        }
+
+        .hero p {
+            color: #666;
+            font-size: 18px;
+            max-width: 580px;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 21px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            background: #222;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #8a6d3b;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            border: 1px solid #ddd;
+            color: #333;
+            background: white;
+        }
+
+        .btn-secondary:hover {
+            border-color: #8a6d3b;
+            color: #8a6d3b;
+        }
+
+        /* ================= PROPERTY SECTION ================= */
+
+        .properties-section {
+            background: white;
+            padding: 75px 24px;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-heading {
+            margin-bottom: 35px;
+        }
+
+        .section-heading small {
+            color: #8a6d3b;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .section-heading h2 {
+            margin-top: 8px;
+            font-size: 34px;
+            color: #222;
+        }
+
+        .section-heading p {
+            margin-top: 8px;
+            color: #777;
+        }
+
+        /* ================= PROPERTY GRID ================= */
+
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .property-card {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.25s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .property-image {
+            height: 220px;
+            overflow: hidden;
+            background: #eee;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .property-card:hover .property-image img {
+            transform: scale(1.04);
+        }
+
+        .property-content {
+            padding: 20px;
+        }
+
+        .property-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #8a6d3b;
+            background: #f5f0e8;
+            padding: 5px 9px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .property-content h3 {
+            font-size: 21px;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        .location {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 13px;
+        }
+
+        .description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 17px;
+        }
+
+        .property-bottom {
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #222;
+        }
+
+        .view-btn {
+            text-decoration: none;
+            color: #8a6d3b;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* ================= CONTACT ================= */
+
+        .contact-section {
+            padding: 75px 24px;
+            background: #f5f3ee;
+        }
+
+        .contact-box {
+            max-width: 850px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .contact-box h2 {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .contact-box p {
+            color: #666;
+            margin-bottom: 28px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            padding: 13px 20px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid #ddd;
+            background: white;
+            color: #222;
+            transition: 0.2s;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            border-color: #8a6d3b;
+            color: #8a6d3b;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #222;
+            color: #aaa;
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 850px) {
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a:not(.nav-contact) {
+                display: none;
+            }
+
+            .property-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero {
+                min-height: 420px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                height: 64px;
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .hero {
+                padding: 65px 20px 55px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+                letter-spacing: -2px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .properties-section,
+            .contact-section {
+                padding: 55px 18px;
+            }
+
+            .section-heading h2 {
+                font-size: 29px;
+            }
+
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .property-image {
+                height: 230px;
+            }
+
+            .contact-box h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <nav class="navbar">
+
+        <a href="#" class="logo">
+            mana<span>hyd</span>properties
+        </a>
+
+        <div class="nav-links">
+            <a href="#properties">Properties</a>
+            <a href="#contact">Contact</a>
+
+            <a
+                href="https://wa.me/919666990942"
+                target="_blank"
+                class="nav-contact">
+                WhatsApp
+            </a>
+        </div>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-small">
+            Hyderabad Properties
+        </div>
+
+        <h1>
+            Find a place<br>
+            that feels <span>right.</span>
+        </h1>
+
+        <p>
+            Simple and genuine property listings around Hyderabad.
+            Explore available properties and contact us directly.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#properties" class="btn btn-primary">
+                View Properties
+            </a>
+
+            <a
+                href="https://wa.me/919666990942"
+                target="_blank"
+                class="btn btn-secondary">
+                WhatsApp Us
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROPERTIES ================= -->
+
+<section class="properties-section" id="properties">
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <small>Our Properties</small>
+
+            <h2>Available Properties</h2>
+
+            <p>
+                Explore our current properties and contact us for more details.
+            </p>
+
+        </div>
+
+
+        <div class="property-grid">
+
+
+            <!-- PROPERTY 1 -->
+
+            <article class="property-card">
+
+                <div class="property-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80"
+                        alt="Modern house">
+
+                </div>
+
+                <div class="property-content">
+
+                    <span class="property-tag">
+                        FOR SALE
+                    </span>
+
+                    <h3>
+                        Premium Residential Plot
+                    </h3>
+
+                    <div class="location">
+                        📍 Hyderabad, Telangana
+                    </div>
+
+                    <p class="description">
+                        Well-connected residential plot in a developing locality.
+                    </p>
+
+                    <div class="property-bottom">
+
+                        <div class="price">
+                            ₹45 Lakhs
+                        </div>
+
+                        <a href="#" class="view-btn">
+                            View Details →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROPERTY 2 -->
+
+            <article class="property-card">
+
+                <div class="property-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80"
+                        alt="Beautiful home">
+
+                </div>
+
+                <div class="property-content">
+
+                    <span class="property-tag">
+                        FOR SALE
+                    </span>
+
+                    <h3>
+                        Independent House
+                    </h3>
+
+                    <div class="location">
+                        📍 Hyderabad, Telangana
+                    </div>
+
+                    <p class="description">
+                        Comfortable family home with excellent road connectivity.
+                    </p>
+
+                    <div class="property-bottom">
+
+                        <div class="price">
+                            ₹75 Lakhs
+                        </div>
+
+                        <a href="#" class="view-btn">
+                            View Details →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROPERTY 3 -->
+
+            <article class="property-card">
+
+                <div class="property-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80"
+                        alt="Residential property">
+
+                </div>
+
+                <div class="property-content">
+
+                    <span class="property-tag">
+                        FOR SALE
+                    </span>
+
+                    <h3>
+                        Residential Land
+                    </h3>
+
+                    <div class="location">
+                        📍 Hyderabad, Telangana
+                    </div>
+
+                    <p class="description">
+                        Peaceful residential location suitable for future construction.
+                    </p>
+
+                    <div class="property-bottom">
+
+                        <div class="price">
+                            ₹55 Lakhs
+                        </div>
+
+                        <a href="#" class="view-btn">
+                            View Details →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="contact-section" id="contact">
+
+    <div class="contact-box">
+
+        <h2>Interested in a property?</h2>
+
+        <p>
+            Call us, send a WhatsApp message, or reach us on Instagram.
+        </p>
+
+        <div class="contact-buttons">
+
+            <!-- CALL -->
+
+            <a
+                href="tel:+919666990942"
+                class="contact-btn">
+                📞 Call Us
+            </a>
+
+
+            <!-- WHATSAPP -->
+
+            <a
+                href="https://wa.me/919666990942"
+                target="_blank"
+                class="contact-btn">
+                💬 WhatsApp
+            </a>
+
+
+            <!-- INSTAGRAM -->
+
+            <a
+                href="https://instagram.com/mana_hydproperties"
+                target="_blank"
+                class="contact-btn">
+                📷 Instagram
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 <strong>manahydproperties</strong>.
+        All rights reserved.
+    </p>
+
+</footer>
+
+
+</body>
+</html>
+```
