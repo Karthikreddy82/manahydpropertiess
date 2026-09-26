@@ -1,13 +1,10 @@
-# Use an unprivileged, non-root Alpine Nginx base image to minimize attack surface
+# Use an unprivileged, non-root Alpine Nginx base image
 FROM nginxinc/nginx-unprivileged:alpine
 
-# Clean default web assets
-RUN rm -rf /usr/share/nginx/html/*
-
-# Copy website assets with non-root ownership
+# Copy website assets directly to the Nginx document root
 COPY --chown=nginx:nginx . /usr/share/nginx/html/
 
-# Expose unprivileged port (ports <1024 require root)
+# Expose unprivileged port
 EXPOSE 8080
 
 CMD ["nginx", "-g", "daemon off;"]
