@@ -10,11 +10,6 @@ pipeline {
         IMAGE_URI      = "${ECR_REGISTRY}/${ECR_REPO_NAME}:${IMAGE_TAG}"
     }
 
-    tools {
-        // Must match the name configured in Manage Jenkins -> Tools
-        sonarScanner 'sonar-scanner'
-    }
-
     stages {
         stage('Checkout Code') {
             steps {
@@ -24,14 +19,17 @@ pipeline {
 
         stage('SonarQube SAST Analysis') {
             steps {
-                // Must match the server name configured in Manage Jenkins -> System
-                withSonarQubeEnv('sonar-server') {
-                    sh '''
-                        sonar-scanner \
-                          -Dsonar.projectKey=manahydpropertiess \
-                          -Dsonar.sources=. \
-                          -Dsonar.exclusions="**/*.test.js,**/node_modules/**"
-                    '''
+                script {
+                    // Dynamically resolves the SonarQube Scanner tool configured in Jenkins
+                    def scannerHome = tool 'sonar-scanner'
+                    withSonarQubeEnv('sonar-server') {
+                        sh """
+                            ${scannerHome}/bin/sonar-scanner \
+                              -Dsonar.projectKey=manahydpropertiess \
+                              -Dsonar.sources=. \
+                              -Dsonar.exclusions="**/*.test.js,**/node_modules/**"
+                        """
+                    }
                 }
             }
         }
@@ -81,17 +79,17 @@ pipeline {
 
     post {
         always {
-            // Prune locally tagged images to prevent build worker disk exhaustion
+            // Clean up locally tagged images to prevent running out of disk space
             sh """
                 docker rmi ${IMAGE_URI} || true
                 docker rmi ${ECR_REGISTRY}/${ECR_REPO_NAME}:latest || true
             """
         }
         success {
-            echo "CI/CD Pipeline executed successfully. Docker image pushed to ${IMAGE_URI}"
+            echo "CI/CD Pipeline executed successfully. Docker image published to ${IMAGE_URI}"
         }
         failure {
-            echo "Pipeline failed. Inspect the console output for scan or build failures."
+            echo "Pipeline run failed. Check the stage logs above for details."
         }
     }
 }
