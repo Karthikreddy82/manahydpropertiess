@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manahydpropertiess-deployment
+  labels:
+    app: manahydpropertiess
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: manahydpropertiess
+  template:
+    metadata:
+      labels:
+        app: manahydpropertiess
+    spec:
+      imagePullSecrets:
+        - name: ecr-cred
+      containers:
+        - name: web
+          image: 003713966273.dkr.ecr.ap-south-1.amazonaws.com/manahydpropertiess:IMAGE_TAG
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
